@@ -5,7 +5,9 @@ from api.binance import Client as BinanceClient
 from api.gmo import Client as GMOClient
 
 SLACK_POST_URL = os.environ['SLACK_POST_URL']
-STABLE_USD = 'BUSD'
+STABLE_USD = 'TUSD'
+
+STABLE_ASSETS = ('USDT', 'TUSD', 'BUSD', 'PAX', 'EUR', 'NGN', 'RUB', 'TRY', 'USDC', 'USDS')
 
 
 def post_slack(assets, xrp_jpy):
@@ -52,8 +54,8 @@ def get_asset_data(name, balance, prices):
     usd = 0
     rate = 0
 
-    if name == STABLE_USD:
-        symbol = STABLE_USD
+    if name in STABLE_ASSETS:
+        symbol = name
         usd = balance
         rate = 1
     elif name + STABLE_USD in prices:
